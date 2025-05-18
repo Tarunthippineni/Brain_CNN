@@ -5,7 +5,7 @@ import numpy as np
 import gdown
 
 # Title of the app
-st.title("Heart Disease Prediction from MRI Images")
+st.title("Brain Image tumor detection")
 
 # Upload the image
 uploaded_file = st.file_uploader("Upload an MRI image (PNG/JPG)", type=["png", "jpg", "jpeg"])
@@ -13,8 +13,8 @@ uploaded_file = st.file_uploader("Upload an MRI image (PNG/JPG)", type=["png", "
 # Download model from Google Drive
 @st.cache_resource
 def load_model():
-    url = 'https://drive.google.com/uc?id=1H6PyS3lqIDA7HJYQF2fG8IvZiZP2zvcG'  # Your Google Drive file link
-    output = 'model.keras'
+    url = 'https://drive.google.com/uc?export=download&id=1WVkjuSSXYCg8VZppR1s6lPm35tbMvbLI'
+    output = 'inceptionv3_binary_model.keras'
     gdown.download(url, output, quiet=False)
     
     # Load the model
@@ -25,7 +25,7 @@ def load_model():
 model = load_model()
 
 # Class labels (based on your training)
-class_labels = ['Normal', 'Hypertrophy', 'Heart failure with infraction (HF-1)', 'Heart failure without infraction (HF)']
+class_labels = ['glioma', 'meningioma', 'no_tumor', 'pituitary_tumor']  # Match notebook's class_indices
 
 # Function to preprocess the image
 def preprocess_image(image):
